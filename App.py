@@ -41,16 +41,45 @@ class NPDA:
             new_state=State(name_of_state)
             self.States+=[new_state]
 
-    def Convert_NPDA_to_CFG(self):
-        pass
+    def Convert_NPDA_to_CFG(self,CFG):
+        for state in self.States:
+            #key = (input-alphabet,top_stack)
+            # value = list of (destination,push stack)
+            for key,value in state.Nueighbor.items():
+                for transition in value:
+                    if transition[1]!="_":
+                        # check every qk and qj 
+                        for k in range(self.Count_States):
+                            for l in range(self.Count_States):
+                                variable="("+state.Name+key[1]+"q"+str(k)+")"
+                                product=key[0]+"("+transition[0].Name+transition[1][0]+"q"+str(l)+")"+"("+"q"+str(l)+transition[1][1]+"q"+str(k)+")"
+                                CFG.Variables[variable]=CFG.Variables.get(variable,[])+[product]
+                                
+                    else:
+                        variable='('+state.Name+key[1]+transition[0].Name+')'
+                        product=key[0]
+                        #insert production to CFG
+                        CFG.Variables[variable]=CFG.Variables.get(variable,[])+[product]
+            
 
+
+#class CFG
+class CFG:
+    def __init__(self):
+        self.Start_Variable=None
+        self.Variables={}
+    def Detection_String(self,String):
+        #DFS travers for derivition tree
+        pass
+        
+            
 class App:
     def __init__(self,file_address):
         self.File_Address=file_address
         self.NPDA=None
         self.CFG=None
         self.Alphabet=None
-    def creat_NPDA(self):
+    def Creat_NPDA(self):
         #read file
         File=open(self.File_Address,'r')
         Lines=File.readlines()
@@ -87,7 +116,13 @@ class App:
             if "*" in info[2]:
                 self.NPDA.States[destination_index].Final_State=True
 
+    def Creat_CFG(self):
+        self.CFG=CFG()
+        self.NPDA.Convert_NPDA_to_CFG(self.CFG)
+
 App=App("input.txt")
-App.creat_NPDA()
+App.Creat_NPDA()
+App.Creat_CFG()
 for state in App.NPDA.States:
     print(state.Nueighbor)
+print(App.CFG.Variables)
