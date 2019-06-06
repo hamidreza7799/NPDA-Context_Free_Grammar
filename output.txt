@@ -1,0 +1,13 @@
+(q0$q0)->a(q00q0)(q0$q0)|a(q00q1)(q1$q0)|b(q01q0)(q0$q0)|b(q01q1)(q1$q0)
+(q0$q1)->a(q00q0)(q0$q1)|a(q00q1)(q1$q1)|b(q01q0)(q0$q1)|b(q01q1)(q1$q1)|a(q00q0)|b(q01q0)
+(q00q0)->a(q00q0)(q00q0)|a(q00q1)(q10q0)|b
+(q00q1)->a(q00q0)(q00q1)|a(q00q1)(q10q1)
+(q01q0)->a|b(q01q0)(q01q0)|b(q01q1)(q11q0)
+(q01q1)->b(q01q0)(q01q1)|b(q01q1)(q11q1)
+input :abba
+output :
+True
+(q0$q1)=>a(q00q0)(q0$q1)=>ab(q0$q1)=>abb(q01q0)=>abba
+input :abb
+output :
+False
