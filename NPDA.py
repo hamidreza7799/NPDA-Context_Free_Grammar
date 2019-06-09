@@ -1,10 +1,12 @@
 class State:
     def __init__(self,name):
         self.Name=name
-        self.Final_State=False
+        #self.Final_State=False
         self.Nueighbor={}
 class NPDA:
     def __init__(self,Alphabet,Count_States,Stack_Symbol,First_Stack_Symbol):
+        #final state for npda
+        self.Final_State=None
         #Alphabet for stack
         self.Stack_Symbol=Stack_Symbol
         self.First_Stack_Symbol=First_Stack_Symbol
