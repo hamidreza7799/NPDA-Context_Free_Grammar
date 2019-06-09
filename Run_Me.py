@@ -88,4 +88,5 @@ App.Write_CFG()
 #detect input string
 App.Detection_String("abba")
 App.Detection_String("ba")
+App.Detection_String("_")
 

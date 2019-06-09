@@ -16,9 +16,13 @@ class Stack:
 class CFG:
     def __init__(self):
         self.Start_Variable=None
+        self.CFG_Have_Lambda_String=False
         self.Variables={}
     #remove lambda production
     def Remove_Lambda_Production(self):
+        #check lambda string in cfg
+        if "_" in self.Variables[self.Start_Variable]:
+            self.CFG_Have_Lambda_String=True
         #find lambda productions
         Variables_with_lambda_production=[]
         for Var,Productions in self.Variables.items():
@@ -34,6 +38,11 @@ class CFG:
                     
             
     def Detection_String(self,String):
+        #check lambda string
+        if String == "_":
+            if self.CFG_Have_Lambda_String:
+                return [self.Start_Variable]
+            return []
         #DFS travers for derivition tree
         String_Lentgh=len(String)
         S_Stack=Stack()

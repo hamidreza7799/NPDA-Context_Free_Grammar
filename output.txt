@@ -12,3 +12,7 @@ input :ba
 output :
 True
 (q0$q1)=>b(q01q0)=>ba
+input :_
+output :
+True
+(q0$q1)=>_
