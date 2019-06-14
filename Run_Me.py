@@ -55,6 +55,7 @@ class App:
             self.CFG.Variables[self.CFG.Start_Variable]=[]
     def Write_CFG(self):
         File=open(self.output,"w")
+        File.write("***my grammar does not lambda productions and remove them for detectin string***"+'\n')
         for var,pro in self.CFG.Variables.items():
             result=var+'->'
             for p in pro:
@@ -83,10 +84,11 @@ App.Creat_NPDA()
 App.Creat_CFG()
 #remove lambda productions
 App.CFG.Remove_Lambda_Production()
-#write cfg with no lambda production
+#write cfg in file
 App.Write_CFG()
 #detect input string
 App.Detection_String("abba")
 App.Detection_String("ba")
 App.Detection_String("_")
+App.Detection_String("aabb")
 
